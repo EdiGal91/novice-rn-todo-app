@@ -63,11 +63,20 @@ export default function App() {
     ToastAndroid.show(`"${title}" was deleted!`, ToastAndroid.LONG);
   };
 
+  const editTitle = (todoId, title) => {
+    setTodos(oldTodos => {
+      const todo = oldTodos.find(todo => todo.id == todoId);
+      todo.title = title;
+      return oldTodos;
+    });
+  };
+
   let content = todoId ? (
     <TodoScreen
       todo={todos.find(({ id }) => id === todoId)}
       goBack={() => setTodoId(null)}
       removeTodo={removeTodo}
+      editTitle={editTitle}
     />
   ) : (
     <MainScreen

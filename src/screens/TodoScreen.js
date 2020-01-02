@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { THEME } from "../theme";
 import { AppCard } from "../components/pure/AppCard";
+import { EditModal } from "../components/EditModal";
 
-export const TodoScreen = ({ todo, goBack, removeTodo }) => {
+export const TodoScreen = ({ todo, goBack, removeTodo, editTitle }) => {
+  const [modal, setModal] = useState(false);
+
   return (
     <View>
+      <EditModal
+        value={todo.title}
+        visible={modal}
+        onCancel={() => setModal(false)}
+        onEdit={title => {
+          setModal(false);
+          editTitle(todo.id, title);
+        }}
+      ></EditModal>
       <AppCard style={styles.card}>
         <Text style={styles.title}>{todo.title}</Text>
-        <Button title="Edit"></Button>
+        <Button title="Edit" onPress={() => setModal(true)}></Button>
       </AppCard>
       <View style={styles.buttons}>
         <View style={styles.button}>
