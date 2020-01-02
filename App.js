@@ -8,16 +8,9 @@ export default function App() {
   const [todoId, setTodoId] = useState(null);
 
   const [todos, setTodos] = useState([
-    { id: 1, title: "Buy Milk" },
-    { id: 2, title: "Buy Bread" },
-    { id: 4, title: "Buy cheese" },
-    { id: 5, title: "Buy butter" },
-    { id: 6, title: "Buy chocolade" },
-    { id: 7, title: "Buy eggs" },
-    { id: 8, title: "Buy flour" },
-    { id: 9, title: "Buy honey" },
-    { id: 10, title: "Buy olives" },
-    { id: 11, title: "Buy sugar" }
+    // { id: 1, title: "Buy Milk" },
+    // { id: 2, title: "Buy Bread" },
+    // { id: 3, title: "Buy sugar" }
   ]);
 
   const addTodo = title => {
