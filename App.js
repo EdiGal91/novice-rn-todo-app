@@ -52,14 +52,18 @@ export default function App() {
   let content = todoId ? (
     <TodoScreen
       todo={todos.find(({ id }) => id === todoId)}
-      goBack={() => setTodoId(() => null)}
+      goBack={() => setTodoId(null)}
+      removeTodo={id => {
+        setTodoId(null);
+        removeTodo(id);
+      }}
     />
   ) : (
     <MainScreen
       todos={todos}
       addTodo={addTodo}
       onLongPress={removeTodo}
-      onPress={todoId => setTodoId(() => todoId)}
+      onPress={todoId => setTodoId(todoId)}
     />
   );
 
