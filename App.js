@@ -17,9 +17,9 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
   const [todoId, setTodoId] = useState(null);
   const [todos, setTodos] = useState([
-    // { id: 1, title: "Buy Milk" },
-    // { id: 2, title: "Buy Bread" },
-    // { id: 3, title: "Buy sugar" }
+    { id: 1, title: "Buy Milk" },
+    { id: 2, title: "Buy Bread" },
+    { id: 3, title: "Buy sugar" }
   ]);
 
   if (!isReady) {
