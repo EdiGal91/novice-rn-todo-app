@@ -10,16 +10,14 @@ export default function App() {
   const [todos, setTodos] = useState([
     { id: 1, title: "Buy Milk" },
     { id: 2, title: "Buy Bread" },
-    { id: 3, title: "Buy biscuit" },
     { id: 4, title: "Buy cheese" },
-    { id: 5, title: "Buy cake" },
-    { id: 6, title: "Buy butter" },
-    { id: 7, title: "Buy chocolade" },
-    { id: 8, title: "Buy eggs" },
-    { id: 9, title: "Buy flour" },
-    { id: 10, title: "Buy honey" },
-    { id: 11, title: "Buy olives" },
-    { id: 12, title: "Buy sugar" }
+    { id: 5, title: "Buy butter" },
+    { id: 6, title: "Buy chocolade" },
+    { id: 7, title: "Buy eggs" },
+    { id: 8, title: "Buy flour" },
+    { id: 9, title: "Buy honey" },
+    { id: 10, title: "Buy olives" },
+    { id: 11, title: "Buy sugar" }
   ]);
 
   const addTodo = title => {
@@ -37,15 +35,31 @@ export default function App() {
     ]);
   };
 
-  const removeTodo = (todoId, toNotify = true) => {
-    if (toNotify) {
-      notifyClosed(todoId);
-    }
-    setTodos(prevTodos => prevTodos.filter(({ id }) => id !== todoId));
+  const removeTodo = todoId => {
+    const todo = todos.find(({ id }) => id === todoId);
+
+    Alert.alert(
+      "Deleting Todo",
+      `Are you sure you want to delete "${todo.title}"?`,
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: `delete "${todo.title}"`,
+          onPress: () => {
+            setTodoId(null);
+            setTodos(prevTodos => prevTodos.filter(({ id }) => id !== todoId));
+            notifyClosed(todo.title);
+          }
+        }
+      ],
+      { cancelable: false }
+    );
   };
 
-  const notifyClosed = todoId => {
-    const { title } = todos.find(({ id }) => id === todoId);
+  const notifyClosed = title => {
     ToastAndroid.show(`"${title}" was deleted!`, ToastAndroid.LONG);
   };
 
@@ -53,10 +67,7 @@ export default function App() {
     <TodoScreen
       todo={todos.find(({ id }) => id === todoId)}
       goBack={() => setTodoId(null)}
-      removeTodo={id => {
-        setTodoId(null);
-        removeTodo(id);
-      }}
+      removeTodo={removeTodo}
     />
   ) : (
     <MainScreen
