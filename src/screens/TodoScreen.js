@@ -4,6 +4,7 @@ import { THEME } from "../theme";
 import { AppCard } from "../components/pure/AppCard";
 import { EditModal } from "../components/EditModal";
 import { AppTextBold } from "../components/pure/AppTextBold";
+import { AppButton } from "../components/pure/AppButton";
 
 export const TodoScreen = ({ todo, goBack, removeTodo, editTitle }) => {
   const [modal, setModal] = useState(false);
@@ -25,7 +26,9 @@ export const TodoScreen = ({ todo, goBack, removeTodo, editTitle }) => {
       </AppCard>
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button color={THEME.COLORS.GRAY} onPress={goBack} title="Back" />
+          <AppButton color={THEME.COLORS.GRAY} onPress={goBack}>
+            Back
+          </AppButton>
         </View>
         <View style={styles.button}>
           <Button
