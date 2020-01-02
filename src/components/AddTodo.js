@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Button, Text } from "react-native";
+import { View, StyleSheet, TextInput, Button, Text, Alert } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { THEME } from "../theme";
 
 export const AddTodo = ({ onSubmit }) => {
@@ -10,6 +11,9 @@ export const AddTodo = ({ onSubmit }) => {
   };
 
   const pressHandler = event => {
+    if (!taskTitle.length) {
+      return Alert.alert("Error", "You cannot add empty task");
+    }
     onSubmit(taskTitle);
     setTaskTitle(() => "");
   };
@@ -24,12 +28,12 @@ export const AddTodo = ({ onSubmit }) => {
         autoCapitalize="sentences"
         autoCompleteType="off"
       />
-      <Button
-        disabled={taskTitle.length < 1}
-        onPress={pressHandler}
-        style={styles.button}
-        title="Add"
-      />
+
+      <AntDesign.Button name="pluscircleo" onPress={pressHandler}>
+        Add
+      </AntDesign.Button>
+      {/* <Button
+      /> */}
     </View>
   );
 };
@@ -41,11 +45,11 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   input: {
-    width: "70%",
+    width: "60%",
     borderStyle: "solid",
     borderBottomWidth: 2,
     borderBottomColor: THEME.COLORS.MAIN_COLOR,
-    padding: 10
-  },
-  button: {}
+    padding: 10,
+    marginBottom: 10
+  }
 });
