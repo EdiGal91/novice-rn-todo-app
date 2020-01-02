@@ -1,17 +1,37 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Alert, ToastAndroid } from "react-native";
+import * as Font from "expo-font";
+import { AppLoading } from "expo";
 import { Navbar } from "./src/components/Navbar";
 import { MainScreen } from "./src/screens/MainScreen";
 import { TodoScreen } from "./src/screens/TodoScreen";
 
-export default function App() {
-  const [todoId, setTodoId] = useState(null);
+async function loadApp() {
+  await Font.loadAsync({
+    "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "roboto-bold": require("./assets/fonts/Roboto-Bold.ttf")
+  });
+}
 
+export default function App() {
+  const [isReady, setIsReady] = useState(false);
+  const [todoId, setTodoId] = useState(null);
   const [todos, setTodos] = useState([
     // { id: 1, title: "Buy Milk" },
     // { id: 2, title: "Buy Bread" },
     // { id: 3, title: "Buy sugar" }
   ]);
+
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadApp}
+        onFinish={() => {
+          setIsReady(true);
+        }}
+      />
+    );
+  }
 
   const addTodo = title => {
     if (!title) {
