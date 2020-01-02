@@ -8,9 +8,9 @@ export const AppButton = ({
   color = THEME.COLORS.MAIN_COLOR
 }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
       <View style={{ ...styles.button, backgroundColor: color }}>
-        <AppTextBold>{children}</AppTextBold>
+        <AppTextBold style={styles.text}>{children}</AppTextBold>
       </View>
     </TouchableOpacity>
   );
@@ -24,5 +24,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center"
+  },
+  text: {
+    color: THEME.COLORS.BLACK
   }
 });

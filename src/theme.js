@@ -3,6 +3,7 @@ export const THEME = {
     MAIN_COLOR: "#3949ab",
     WHITE: "#ffffff",
     DANGER: "#e53940",
-    GRAY: "#757575"
+    GRAY: "#757575",
+    BLACK: "#fff"
   }
 };
