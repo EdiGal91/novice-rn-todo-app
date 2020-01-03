@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Alert, ToastAndroid } from "react-native";
+import { StyleSheet, View, Alert, ToastAndroid, Keyboard } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { Navbar } from "./src/components/Navbar";
@@ -46,6 +46,7 @@ export default function App() {
         title
       }
     ]);
+    Keyboard.dismiss();
   };
 
   const removeTodo = todoId => {
