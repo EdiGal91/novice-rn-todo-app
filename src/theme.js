@@ -5,5 +5,8 @@ export const THEME = {
     DANGER: "#e53940",
     GRAY: "#757575",
     BLACK: "#fff"
+  },
+  PADDING: {
+    HORIZONTAL: 30
   }
 };

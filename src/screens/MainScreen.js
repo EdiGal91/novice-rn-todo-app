@@ -1,10 +1,30 @@
-import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Image, Dimensions } from "react-native";
 import { Todos } from "../components/Todos";
 import { AddTodo } from "../components/AddTodo";
+import { THEME } from "../theme";
 export const MainScreen = ({ addTodo, todos, onLongPress, onPress }) => {
+  const [deviceWidth, setDeviceWidth] = useState(
+    Dimensions.get("window").width - THEME.PADDING.HORIZONTAL * 2
+  );
+
+  useEffect(() => {
+    const update = () => {
+      const width =
+        Dimensions.get("window").width - THEME.PADDING.HORIZONTAL * 2;
+      setDeviceWidth(width);
+    };
+    Dimensions.addEventListener("change", update);
+
+    return () => {
+      Dimensions.removeEventListener("change", update);
+    };
+  });
+
   const content = todos.length ? (
-    <Todos todos={todos} onLongPress={onLongPress} onPress={onPress} />
+    <View style={{ width: deviceWidth }}>
+      <Todos todos={todos} onLongPress={onLongPress} onPress={onPress} />
+    </View>
   ) : (
     <View style={styles.wrapImage}>
       <Image
